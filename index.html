@@ -467,29 +467,19 @@ function doSub(){
   btn.textContent='신청 중...';
   btn.disabled=true;
 
-  var data = JSON.stringify({
-    name: n,
-    phone: p,
-    pet_type: petname,
-    age: breed,
-    message: '펫보험 3사 비교 상담'
-  });
+  var url = 'https://script.google.com/macros/s/AKfycbxLynBznplNO1OOs1oCC1IUIuPX7BM-xHVgyLEoKUGfeKTjbmw8WtVwpI2SaUC5YoQ6/exec'
+    + '?name=' + encodeURIComponent(n)
+    + '&phone=' + encodeURIComponent(p)
+    + '&pet_type=' + encodeURIComponent(petname)
+    + '&age=' + encodeURIComponent(breed)
+    + '&message=' + encodeURIComponent('펫보험 3사 비교 상담');
 
-  fetch('https://script.google.com/macros/s/AKfycbyCxwM-fKqVZ1GHeLorNkfGLpqzEaIW_Ci6r9pP6lD-y17m7Bp275ppnjim6_gvC3aR/exec',{
-    method:'POST',
-    body:data,
-    headers:{'Content-Type':'application/json'}
-  }).then(function(r){
-    if(r.ok){
-      document.getElementById('mainPage').style.display='none';
-      var d=document.getElementById('donePage');
-      d.style.display='flex';
-      window.scrollTo(0,0);
-    } else {
-      alert('오류가 발생했습니다. 카카오톡으로 문의해주세요.');
-      btn.textContent='비교견적 즉시받기 (무료)';
-      btn.disabled=false;
-    }
+  fetch(url, {method:'GET', mode:'no-cors'})
+  .then(function(){
+    document.getElementById('mainPage').style.display='none';
+    var d=document.getElementById('donePage');
+    d.style.display='flex';
+    window.scrollTo(0,0);
   }).catch(function(){
     alert('네트워크 오류입니다. 카카오톡으로 문의해주세요.');
     btn.textContent='비교견적 즉시받기 (무료)';
