@@ -474,17 +474,14 @@ function doSub(){
     + '&age=' + encodeURIComponent(breed)
     + '&message=' + encodeURIComponent('펫보험 3사 비교 상담');
 
-  fetch(url, {method:'GET', mode:'no-cors'})
-  .then(function(){
+  var img = new Image();
+  img.onload = img.onerror = function(){
     document.getElementById('mainPage').style.display='none';
     var d=document.getElementById('donePage');
     d.style.display='flex';
     window.scrollTo(0,0);
-  }).catch(function(){
-    alert('네트워크 오류입니다. 카카오톡으로 문의해주세요.');
-    btn.textContent='비교견적 즉시받기 (무료)';
-    btn.disabled=false;
-  });
+  };
+  img.src = url;
 }
 </script>
 </body>
