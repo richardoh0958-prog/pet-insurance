@@ -467,18 +467,18 @@ function doSub(){
   btn.textContent='신청 중...';
   btn.disabled=true;
 
-  var data=new FormData();
-  data.append('_subject','[펫보험] 상담 신청 - '+n);
-  data.append('보호자이름', n);
-  data.append('연락처', p);
-  data.append('반려동물이름', petname);
-  data.append('품종', breed);
-  data.append('상품', '펫보험 3사 비교 상담');
+  var data = JSON.stringify({
+    name: n,
+    phone: p,
+    pet_type: petname,
+    age: breed,
+    message: '펫보험 3사 비교 상담'
+  });
 
-  fetch('https://formspree.io/f/mbdbonzl',{
+  fetch('https://script.google.com/macros/s/AKfycbxrJFKanOXpL7C5b00tk_vaJAhKSr0Tj7rx1mfW__Uvj11dyElyyRSUpx-rSNQiSo5w/exec',{
     method:'POST',
     body:data,
-    headers:{'Accept':'application/json'}
+    headers:{'Content-Type':'application/json'}
   }).then(function(r){
     if(r.ok){
       document.getElementById('mainPage').style.display='none';
