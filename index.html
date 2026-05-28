@@ -228,12 +228,12 @@ body{font-family:'Noto Sans KR',sans-serif;background:#f0f4f8;color:#111;font-si
           <div class="fg"><label>보호자 이름</label><input type="text" id="fname" placeholder="홍길동"/></div>
           <div class="fg"><label>연락처</label><input type="tel" id="fphone" placeholder="010-0000-0000"/></div>
           <div class="row2">
-            <div class="fg"><label>반려동물 이름</label><input type="text" placeholder="예) 뭉치"/></div>
-            <div class="fg"><label>품종</label><input type="text" placeholder="예) 말티즈"/></div>
+            <div class="fg"><label>반려동물 이름</label><input type="text" id="fpetname" placeholder="예) 뭉치"/></div>
+            <div class="fg"><label>품종</label><input type="text" id="fbreed" placeholder="예) 말티즈"/></div>
           </div>
           <div class="row2">
             <div class="fg"><label>반려동물 나이</label>
-              <select>
+              <select id="fage">
                 <option value="" disabled selected>선택</option>
                 <option>1세 미만</option><option>1세</option><option>2세</option><option>3세</option>
                 <option>4세</option><option>5세</option><option>6세</option><option>7세</option>
@@ -241,11 +241,11 @@ body{font-family:'Noto Sans KR',sans-serif;background:#f0f4f8;color:#111;font-si
               </select>
             </div>
             <div class="fg"><label>성별</label>
-              <select><option value="" disabled selected>선택</option><option>수컷</option><option>암컷</option></select>
+              <select id="fgender"><option value="" disabled selected>선택</option><option>수컷</option><option>암컷</option></select>
             </div>
           </div>
           <div class="fg"><label>반려동물 종류</label>
-            <select><option value="" disabled selected>선택</option><option>강아지</option><option>고양이</option></select>
+            <select id="fpettype"><option value="" disabled selected>선택</option><option>강아지</option><option>고양이</option></select>
           </div>
           <div class="agree-row">
             <input type="checkbox" id="ag1"/>
@@ -456,8 +456,11 @@ function openKakao(){window.open('https://open.kakao.com/o/sSydv3vi','_blank')}
 function doSub(){
   var n=document.getElementById('fname').value.trim();
   var p=document.getElementById('fphone').value.trim();
-  var petname=document.getElementById('fpetname')?document.getElementById('fpetname').value.trim():'';
-  var breed=document.getElementById('fbreed')?document.getElementById('fbreed').value.trim():'';
+  var petname=document.getElementById('fpetname').value.trim();
+  var breed=document.getElementById('fbreed').value.trim();
+  var age=document.getElementById('fage').value;
+  var gender=document.getElementById('fgender').value;
+  var pettype=document.getElementById('fpettype').value;
   var a=document.getElementById('ag1').checked;
   if(!n){alert('보호자 이름을 입력해주세요');return}
   if(!p){alert('연락처를 입력해주세요');return}
@@ -470,8 +473,11 @@ function doSub(){
   var url = 'https://script.google.com/macros/s/AKfycbw0j2aFbaziZW8Iza97owxwvhHdJgVV4rJvr2Y66tIDzPMyWyoTbHYCPQvaiHW8S7x_/exec'
     + '?name=' + encodeURIComponent(n)
     + '&phone=' + encodeURIComponent(p)
-    + '&pet_type=' + encodeURIComponent(petname)
-    + '&age=' + encodeURIComponent(breed)
+    + '&pet_name=' + encodeURIComponent(petname)
+    + '&breed=' + encodeURIComponent(breed)
+    + '&age=' + encodeURIComponent(age)
+    + '&gender=' + encodeURIComponent(gender)
+    + '&pet_type=' + encodeURIComponent(pettype)
     + '&message=' + encodeURIComponent('펫보험 3사 비교 상담');
 
   var img = new Image();
